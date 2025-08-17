@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Convite Romântico</title>
+  <meta name="theme-color" content="#f9d5e5" />
+  <style>
+    /* =============================
+       ESTILO GERAL (mobile-first)
+       Edite as variáveis abaixo
+    ==============================*/
+    :root{
+      /* Personalize aqui */
+      --nome: "Geo"; /* Nome exibido no título */
+      --data: "Qualquer dia é dia";
+      --hora: "A qualquer hora";
+      --local: "Em alguma cama";
+      --link-mapa: "https://maps.app.goo.gl/"; /* cole o link do Google Maps */
+      --msg-whats: "Geo, te convido para uma transa especial qualquer dia desses. Vamos? 💖";
+
+      /* Cores & estilo */
+      --bg1: #ffe4ec;
+      --bg2: #ffd1f1;
+      --bg3: #f8e1ff;
+      --card: rgba(255,255,255,0.72);
+      --txt: #6b102f;
+      --txt-soft: #a22e5a;
+      --accent: #e11d48; /* rosa */
+      --accent-2: #f43f5e; /* rosa claro */
+      --shadow: 0 10px 30px rgba(225,29,72,.25);
+      --radius: 24px;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+      color:var(--txt);
+      background: radial-gradient(1200px 1200px at 80% -10%, var(--bg3), transparent 60%),
+                  radial-gradient(1000px 1000px at -10% 10%, var(--bg2), transparent 60%),
+                  linear-gradient(180deg, var(--bg1), #fff0f5 60%);
+      overflow-x:hidden;
+    }
+
+    /* Corações flutuantes de fundo */
+    .hearts{
+      position:fixed; inset:0; pointer-events:none; overflow:hidden; z-index:0;
+    }
+    .heart{
+      position:absolute; fill: #e11d48; opacity:.35;
+      animation: float var(--dur) linear infinite;
+      filter: drop-shadow(0 2px 4px rgba(225,29,72,.3));
+      transform: translateY(100vh) rotate(var(--rot));
+    }
+    @keyframes float{
+      from{ transform: translateY(100vh) rotate(var(--rot)); }
+      to{ transform: translateY(-15vh) rotate(var(--rot)); }
+    }
+
+    /* Layout */
+    .wrap{ position:relative; z-index:1; min-height:100dvh; display:flex; align-items:center; justify-content:center; padding:20px; }
+
+    .card{
+      width:100%; max-width:420px; background:var(--card);
+      backdrop-filter: blur(6px);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 22px 18px 18px;
+    }
+
+    header{ text-align:center; }
+    .chip{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:8px 12px; border-radius:999px; background:#fff; color:var(--txt-soft);
+      font-weight:600; font-size:.9rem; box-shadow: 0 6px 16px rgba(0,0,0,.06);
+    }
+    h1{
+      margin:14px 0 6px; font-size:1.9rem; line-height:1.15; letter-spacing:-.02em;
+    }
+    .lead{ margin:0; color:var(--txt-soft); font-size:1rem; }
+
+    .info{
+      display:grid; gap:10px; margin:18px 0 10px;
+      grid-template-columns: 1fr;
+    }
+    .row{ display:flex; align-items:center; gap:10px; background:#fff; border-radius:16px; padding:12px 12px; box-shadow: 0 8px 18px rgba(0,0,0,.04); }
+    .ico{ width:28px; height:28px; display:grid; place-items:center; border-radius:999px; background: #ffe1ea; }
+    .txt-strong{ font-weight:700; }
+
+    .cta{
+      margin-top:14px; display:grid; gap:10px;
+      grid-template-columns: 1fr;
+    }
+    .btn{
+      appearance:none; border:0; border-radius:16px; padding:14px 16px; font-weight:800; font-size:1.05rem; cursor:pointer;
+      background:linear-gradient(180deg, var(--accent-2), var(--accent)); color:white; box-shadow: 0 12px 26px rgba(225,29,72,.35);
+      transition: transform .12s ease, box-shadow .12s ease, filter .12s ease;
+    }
+    .btn:active{ transform: translateY(1px) scale(.99); filter:saturate(1.1); }
+    .btn-secondary{
+      background:white; color:var(--accent); border:2px solid #ffd1dc; font-weight:700;
+    }
+
+    footer{ text-align:center; margin-top:12px; font-size:.85rem; color:#a14a6b; }
+
+    /* Pequenos enfeites */
+    .divider{ height:1px; background: linear-gradient(90deg, transparent, #ffd1dc, transparent); margin:10px 0; }
+    .sparkle{
+      font-size:1.05rem; background: #fff; border-radius:999px; padding:6px 10px; display:inline-block; box-shadow: 0 8px 16px rgba(0,0,0,.06);
+    }
+
+    /* Responsivo leve para telas um pouco maiores */
+    @media (min-width:420px){ h1{ font-size:2.1rem; } }
+  </style>
+</head>
+<body>
+  <!-- Fundo com corações (SVG inline para melhor qualidade) -->
+  <div class="hearts" aria-hidden="true">
+    <!-- Duplicamos com tamanhos/tempos diferentes -->
+    <!-- Use variáveis inline para controlar posição/tamanho/duração -->
+    <svg class="heart" viewBox="0 0 24 24" style="--dur:9s; left:6vw; top:10vh; width:22px; height:22px; --rot: 8deg; opacity:.45"><path d="M12.1 21.35l-1.1-1.01C5.14 15.24 2 12.39 2 8.98 2 6.36 4.06 4.3 6.68 4.3c1.5 0 2.94.7 3.82 1.8.88-1.1 2.32-1.8 3.82-1.8 2.62 0 4.68 2.06 4.68 4.68 0 3.41-3.14 6.26-8.9 11.36l-1 1.01z"/></svg>
+    <svg class="heart" viewBox="0 0 24 24" style="--dur:11s; left:72vw; top:35vh; width:34px; height:34px; --rot:-10deg; opacity:.32"><path d="M12.1 21.35l-1.1-1.01C5.14 15.24 2 12.39 2 8.98 2 6.36 4.06 4.3 6.68 4.3c1.5 0 2.94.7 3.82 1.8.88-1.1 2.32-1.8 3.82-1.8 2.62 0 4.68 2.06 4.68 4.68 0 3.41-3.14 6.26-8.9 11.36l-1 1.01z"/></svg>
+    <svg class="heart" viewBox="0 0 24 24" style="--dur:13s; left:48vw; top:70vh; width:28px; height:28px; --rot: 4deg; opacity:.38"><path d="M12.1 21.35l-1.1-1.01C5.14 15.24 2 12.39 2 8.98 2 6.36 4.06 4.3 6.68 4.3c1.5 0 2.94.7 3.82 1.8.88-1.1 2.32-1.8 3.82-1.8 2.62 0 4.68 2.06 4.68 4.68 0 3.41-3.14 6.26-8.9 11.36l-1 1.01z"/></svg>
+    <svg class="heart" viewBox="0 0 24 24" style="--dur:10s; left:20vw; top:55vh; width:18px; height:18px; --rot:-6deg; opacity:.46"><path d="M12.1 21.35l-1.1-1.01C5.14 15.24 2 12.39 2 8.98 2 6.36 4.06 4.3 6.68 4.3c1.5 0 2.94.7 3.82 1.8.88-1.1 2.32-1.8 3.82-1.8 2.62 0 4.68 2.06 4.68 4.68 0 3.41-3.14 6.26-8.9 11.36l-1 1.01z"/></svg>
+    <svg class="heart" viewBox="0 0 24 24" style="--dur:12s; left:88vw; top:12vh; width:24px; height:24px; --rot: 12deg; opacity:.40"><path d="M12.1 21.35l-1.1-1.01C5.14 15.24 2 12.39 2 8.98 2 6.36 4.06 4.3 6.68 4.3c1.5 0 2.94.7 3.82 1.8.88-1.1 2.32-1.8 3.82-1.8 2.62 0 4.68 2.06 4.68 4.68 0 3.41-3.14 6.26-8.9 11.36l-1 1.01z"/></svg>
+  </div>
+
+  <main class="wrap">
+    <article class="card" role="dialog" aria-label="Convite romântico">
+      <header>
+        <span class="chip">Convite Especial 💌</span>
+        <h1>Oi, <span class="txt-strong" id="nome"></span>!</h1>
+        <p class="lead">Tenho um convite que vem direto do coração…</p>
+      </header>
+
+      <div class="divider" role="presentation"></div>
+
+      <section class="info" aria-labelledby="detalhes">
+        <h2 id="detalhes" class="sr-only">Detalhes do encontro</h2>
+        <div class="row" aria-label="Data">
+          <div class="ico" aria-hidden="true">📅</div>
+          <div>
+            <div class="txt-strong" id="data"></div>
+            <div>Sua bucetuda.</div>
+          </div>
+        </div>
+        <div class="row" aria-label="Hora">
+          <div class="ico" aria-hidden="true">⏰</div>
+          <div>
+            <div class="txt-strong" id="hora"></div>
+            <div>Prometo te comer gostoso.</div>
+          </div>
+        </div>
+        <div class="row" aria-label="Local">
+          <div class="ico" aria-hidden="true">📍</div>
+          <div>
+            <div class="txt-strong" id="local"></div>
+            <div>
+              <a id="mapa" href="#" target="_blank" rel="noopener" style="color:var(--accent); text-decoration:none; font-weight:700">Ver no mapa</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="cta">
+        <a id="btn-whats" class="btn" href="#" target="_blank" rel="noopener" aria-label="Confirmar no WhatsApp">Quero dizer SIIIM 💖</a>
+        <button class="btn btn-secondary" onclick="alert('Então é um encontro! ✨ Mal posso esperar por você. 💞')">Ahh, eu topo!</button>
+      </div>
+
+      <footer>
+        <span class="sparkle">Com carinho, de quem quer te comer ✨</span>
+      </footer>
+    </article>
+  </main>
+
+  <!-- Acessibilidade: esconder apenas visualmente -->
+  <style>
+    .sr-only{ position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
+  </style>
+
+  <script>
+    // ===== Personalização rápida via CSS Variables =====
+    const root = getComputedStyle(document.documentElement);
+    const nome = root.getPropertyValue('--nome').replaceAll('"','').trim();
+    const data = root.getPropertyValue('--data').replaceAll('"','').trim();
+    const hora = root.getPropertyValue('--hora').replaceAll('"','').trim();
+    const local = root.getPropertyValue('--local').replaceAll('"','').trim();
+    const mapa = root.getPropertyValue('--link-mapa').replaceAll('"','').trim();
+    const msg = root.getPropertyValue('--msg-whats').replaceAll('"','').trim();
+
+    document.getElementById('nome').textContent = nome || 'Meu Amor';
+    document.getElementById('data').textContent = data || 'Sábado, 23 de Agosto';
+    document.getElementById('hora').textContent = hora || '19:30';
+    document.getElementById('local').textContent = local || 'Nosso lugar favorito';
+
+    const mapaA = document.getElementById('mapa');
+    mapaA.href = (mapa && mapa !== 'https://maps.app.goo.gl/') ? mapa : '#';
+    if(mapaA.href.endsWith('#')) mapaA.style.opacity = .6;
+
+    const btn = document.getElementById('btn-whats');
+    const encoded = encodeURIComponent(msg || 'Amor, te convido para um encontro especial. Vamos? 💖');
+    btn.href = `https://wa.me/qr/F3JK4VSDQ2P2O1`;
+  </script>
+</body>
+</html>
